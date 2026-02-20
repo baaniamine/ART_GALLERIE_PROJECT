@@ -99,4 +99,21 @@ public class VenteArtdao implements daoInterface<VenteArt>{
             return ps.executeUpdate() ==1;
         }
     }
+    public List<String> afficherTopArtiste() throws Exception{
+        String sql= """
+                SELECT o.artiste , COUNT(*) AS nbventes FROM vente_art  v 
+                JOIN oeuvre o ON v.idOeuvre = o.idOeuvre
+                GROUPE BY o.artiste
+                 ORDER BY nbVentes DESC
+                """;
+        try(Statement stt = Db_connection.getInstance().getConnection().createStatement();
+        ResultSet rs = stt.executeQuery(sql)){
+            List<String> result = new ArrayList<>();
+            while (rs.next()){
+                result.add(rs.getString("artiste") + "|" + rs.getInt("nbventes") + "ventes");
+            }
+            return result;
+        }
+
+    }
 }
