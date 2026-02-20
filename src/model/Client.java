@@ -16,7 +16,7 @@ public class Client {
     public int getId_client(){
         return idClient;
     }
-    public void setId_client(int id_client) {
+    public void setId_client(int idClient) {
         this.idClient = idClient;
     }
     public String getNom(){

@@ -72,12 +72,13 @@ public class Oeuvredao implements daoInterface<Oeuvre>{
     }
     @Override
     public boolean update(Oeuvre oeuvre) throws Exception{
-        String sql = "UPDATE oeuvre SET titre =? ,artiste=? , categorie=?, prix =?";
+        String sql = "UPDATE oeuvre SET titre =? ,artiste=? , categorie=?, prix =? WHERE idOeuvre=?";
         try(PreparedStatement ps = Db_connection.getInstance().getConnection().prepareStatement(sql)){
             ps.setString(1, oeuvre.getTitre());
             ps.setString(2, oeuvre.getArtiste());
             ps.setString(3, oeuvre.getCategorie());
             ps.setInt(4, oeuvre.getPrix());
+            ps.setInt(5, oeuvre.getIdOeuvre());
             return ps.executeUpdate() ==1;
         }
 
@@ -135,7 +136,7 @@ public List<Oeuvre> filtreByCategory(String categorie) throws Exception{
         }
 }
 public Boolean updatedstatut(int  idOeuvre) throws Exception {
-    String sql = "UPDATE oeuvre SET statut = VENDUE WHERE idOeuvre = ? ";
+    String sql = "UPDATE oeuvre SET statut = 'VENDUE' WHERE idOeuvre = ? ";
     try (PreparedStatement ps = Db_connection.getInstance().getConnection().prepareStatement(sql)) {
         ps.setInt(1, idOeuvre);
         return ps.executeUpdate() == 1;

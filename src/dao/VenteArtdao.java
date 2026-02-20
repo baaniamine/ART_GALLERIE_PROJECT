@@ -104,7 +104,7 @@ new Oeuvredao().updatedstatut(venteart.getOuvre().getIdOeuvre());
         String sql= """
                 SELECT o.artiste , COUNT(*) AS nbventes FROM vente_art  v 
                 JOIN oeuvre o ON v.idOeuvre = o.idOeuvre
-                GROUPE BY o.artiste
+                GROUP BY o.artiste
                  ORDER BY nbVentes DESC
                 """;
         try(Statement stt = Db_connection.getInstance().getConnection().createStatement();

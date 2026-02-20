@@ -48,7 +48,7 @@ try(PreparedStatement ps = Db_connection.getInstance().getConnection().prepareSt
             ps.setString(2, client.getEmail());
             int rows =ps.executeUpdate();
             if (rows ==1 ){
-            try(ResultSet key = ps.getGeneratedKeys()){
+               try(ResultSet key = ps.getGeneratedKeys()){
                 if (key.next()){
                     int id = key.getInt(1);
                     client.setId_client(id);
