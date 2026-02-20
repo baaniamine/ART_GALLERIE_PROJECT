@@ -77,7 +77,8 @@ public class Oeuvredao implements daoInterface<Oeuvre>{
             ps.setString(1, oeuvre.getTitre());
             ps.setString(2, oeuvre.getArtiste());
             ps.setString(3, oeuvre.getCategorie());
-            ps.setInt(4, oeuvre.getPrix());   return ps.executeUpdate() ==1;
+            ps.setInt(4, oeuvre.getPrix());
+            return ps.executeUpdate() ==1;
         }
 
     }
@@ -132,5 +133,13 @@ public List<Oeuvre> filtreByCategory(String categorie) throws Exception{
                 return oeuvres;
             }
         }
+}
+public Boolean updatedstatut(int  idOeuvre) throws Exception {
+    String sql = "UPDATE oeuvre SET statut = VENDUE WHERE idOeuvre = ? ";
+    try (PreparedStatement ps = Db_connection.getInstance().getConnection().prepareStatement(sql)) {
+        ps.setInt(1, idOeuvre);
+        return ps.executeUpdate() == 1;
+    }
+
 }
 }

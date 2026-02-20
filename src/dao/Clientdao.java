@@ -42,10 +42,10 @@ try(PreparedStatement ps = Db_connection.getInstance().getConnection().prepareSt
     }
     @Override
     public int  insert(Client client) throws Exception {
-        String sql = "INSERT INTO(nom,email) VALUES =(?,?)";
-        try(PreparedStatement ps = Db_connection.getInstance().getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
+        String sql = "INSERT INTO client(nom,email) VALUES (?,?)";
+        try(PreparedStatement ps = Db_connection.getInstance().getConnection().prepareStatement(sql ,Statement.RETURN_GENERATED_KEYS)){
             ps.setString(1, client.getNom());
-            ps.setString(1, client.getEmail());
+            ps.setString(2, client.getEmail());
             int rows =ps.executeUpdate();
             if (rows ==1 ){
             try(ResultSet key = ps.getGeneratedKeys()){

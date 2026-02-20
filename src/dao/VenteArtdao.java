@@ -64,6 +64,7 @@ public class VenteArtdao implements daoInterface<VenteArt>{
             int rows = ps.executeUpdate();
             if(rows ==1){
                 try(ResultSet keys = ps.getGeneratedKeys()){
+new Oeuvredao().updatedstatut(venteart.getOuvre().getIdOeuvre());
                     if (keys.next()){
                         int key = keys.getInt(1);
                         venteart.setIdVente(key);
@@ -116,4 +117,5 @@ public class VenteArtdao implements daoInterface<VenteArt>{
         }
 
     }
+
 }
